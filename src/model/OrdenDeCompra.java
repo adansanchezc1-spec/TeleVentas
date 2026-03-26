@@ -8,11 +8,4 @@ package model;
 
 class OrdenDeCompra {
 
-    OrdenDeCompra(String idOrden, MetodoPago pago) {
-    }
-
-    void agregarProducto(Producto p) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 }
