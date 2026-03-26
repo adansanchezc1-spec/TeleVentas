@@ -6,7 +6,7 @@ package model;
  */
 
 
-class Queja {
+public class Queja {
  private String titulo;
     private String descripcion;
 
