@@ -1,8 +1,4 @@
 package com.model.menu;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 import com.model.model.Catalogo;
 import com.model.model.Cliente;
 import com.model.model.GerenteDeRelaciones;
@@ -10,6 +6,9 @@ import com.model.model.MetodoPago;
 import com.model.model.OrdenDeCompra;
 import com.model.model.Producto;
 import com.model.service.OrdenService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class MenuCliente {
       private static final int OPCION_CONSULTAR_CATALOGO   = 1;
@@ -19,18 +18,29 @@ public class MenuCliente {
     private static final int OPCION_PRESENTAR_QUEJA      = 5;
     private static final int OPCION_SALIR                = 6;
 
+    private static String lastEntrada;
+
     public static void mostrar(Cliente cliente, Catalogo catalogo,
                                GerenteDeRelaciones gerente,
                                OrdenService ordenService, Scanner sc) {
         int opcion;
         do {
             imprimirMenu(cliente.getNombre());
-            opcion = leerOpcion(sc, OPCION_SALIR);
+            String entrada = leerEntrada(sc);
+            try {
+                opcion = Integer.parseInt(entrada);
+            } catch (NumberFormatException e) {
+                if (entrada.contains(",") && entrada.toUpperCase().contains("P")) {
+                    opcion = OPCION_INGRESAR_ORDEN;
+                } else {
+                    opcion = -1;
+                }
+            }
 
             switch (opcion) {
                 case OPCION_CONSULTAR_CATALOGO -> cliente.consultarCatalogo(catalogo);
                 case OPCION_SOLICITAR_ENVIO -> cliente.solicitarEnvioCatalogo();
-                case OPCION_INGRESAR_ORDEN -> flujoIngresarOrden(cliente, catalogo, ordenService, sc);
+                case OPCION_INGRESAR_ORDEN -> flujoIngresarOrden(cliente, catalogo, ordenService, sc, (opcion == OPCION_INGRESAR_ORDEN && lastEntrada != null && !lastEntrada.matches("\\d+")) ? lastEntrada : null);
                 case OPCION_CANCELAR_ORDEN -> flujoGestionarCancelacion(cliente, ordenService, sc);
                 case OPCION_PRESENTAR_QUEJA -> flujoPresentarQueja(cliente, gerente, sc);
                 case OPCION_SALIR -> {
@@ -43,11 +53,11 @@ public class MenuCliente {
     // ── Flujo: ingresar orden de compra ──────────────────────
 
     private static void flujoIngresarOrden(Cliente cliente, Catalogo catalogo,
-                                           OrdenService ordenService, Scanner sc) {
+                                           OrdenService ordenService, Scanner sc, String preInput) {
         System.out.println("\n  ── Ingresar Orden de Compra ──────────");
         cliente.consultarCatalogo(catalogo);
 
-        List<Producto> seleccionados = seleccionarProductos(catalogo, sc);
+        List<Producto> seleccionados = seleccionarProductos(catalogo, sc, preInput);
         if (seleccionados.isEmpty()) {
             System.out.println("  ⚠ No se seleccionó ningún producto válido. Orden cancelada.");
             return;
@@ -65,9 +75,15 @@ public class MenuCliente {
         }
     }
 
-    private static List<Producto> seleccionarProductos(Catalogo catalogo, Scanner sc) {
-        System.out.print("  Ingresa los IDs de productos separados por coma (ej: P001,P003): ");
-        String[] ids = sc.nextLine().trim().split(",");
+    private static List<Producto> seleccionarProductos(Catalogo catalogo, Scanner sc, String preInput) {
+        String idsStr;
+        if (preInput != null) {
+            idsStr = preInput;
+        } else {
+            System.out.print("  Ingresa los IDs de productos separados por coma (ej: P001,P003): ");
+            idsStr = sc.nextLine().trim();
+        }
+        String[] ids = idsStr.split(",");
         List<Producto> seleccionados = new ArrayList<>();
 
         for (String idRaw : ids) {
@@ -148,14 +164,11 @@ public class MenuCliente {
         System.out.println("  ╚═══════════════════════════════════╝");
     }
 
-    private static int leerOpcion(Scanner sc, int max) {
+    private static String leerEntrada(Scanner sc) {
         System.out.print("  Opción: ");
-        try {
-            int op = Integer.parseInt(sc.nextLine().trim());
-            return (op >= 1 && op <= max) ? op : -1;
-        } catch (NumberFormatException e) {
-            return -1;
-        }
+        String entrada = sc.nextLine().trim();
+        lastEntrada = entrada;
+        return entrada;
     }
 
     private static int leerIndice(Scanner sc, int max, String mensaje) {
