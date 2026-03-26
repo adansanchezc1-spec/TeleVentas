@@ -6,8 +6,8 @@ public class MetodoPago {
     public static final String TIPO           = "tarjeta_credito";
     private static final int   LONGITUD_TARJETA = 16;
 
-    private String tipo;
-    private String numeroTarjeta;
+    private final String tipo;
+    private final String numeroTarjeta;
 
     public MetodoPago(String numeroTarjeta) {
         this.tipo          = TIPO;

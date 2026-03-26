@@ -1,7 +1,7 @@
 package com.model.model;
 
 public abstract class EmpresaTransporte {
-    private String nombre;
+    private final String nombre;
     public EmpresaTransporte(String nombre) {
         this.nombre = nombre;
     }

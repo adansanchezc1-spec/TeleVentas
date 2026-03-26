@@ -10,8 +10,8 @@ import java.util.UUID;
 public class Cliente extends Usuario {
 
     private boolean          recibirCatalogoCada15Dias;
-    private List<OrdenDeCompra> ordenes;
-    private List<Queja>         quejas;
+    private final List<OrdenDeCompra> ordenes;
+    private final List<Queja>         quejas;
 
     public Cliente(String nombre, String correo) {
         super(nombre, correo, "Cliente");

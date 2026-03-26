@@ -70,18 +70,12 @@ public class MenuPrincipal {
     }
 
     private static Usuario crearUsuario(int opcion, String nombre, String correo) {
-        switch (opcion) {
-            case ROL_CLIENTE -> {
-                return new Cliente(nombre, correo);
-            }
-            case ROL_AGENTE -> {
-                return new AgenteDeDeposito(nombre, correo);
-            }
-            case ROL_GERENTE -> {
-                return new GerenteDeRelaciones(nombre, correo);
-            }
+        return switch (opcion) {
+            case ROL_CLIENTE -> new Cliente(nombre, correo);
+            case ROL_AGENTE -> new AgenteDeDeposito(nombre, correo);
+            case ROL_GERENTE -> new GerenteDeRelaciones(nombre, correo);
             default -> throw new IllegalArgumentException("Rol no reconocido: " + opcion);
-        }
+        };
     }
 }
 

@@ -22,10 +22,11 @@ public class MenuGerenteRelaciones {
             opcion = leerOpcion(sc, OPCION_SALIR);
 
             switch (opcion) {
-                case OPCION_VER_QUEJAS:      flujoVerQuejas(gerente);              break;
-                case OPCION_GESTIONAR_QUEJA: flujoGestionarQueja(gerente, sc);     break;
-                case OPCION_SALIR:           break;
-                default:                     System.out.println("  ⚠ Opción no válida.");
+                case OPCION_VER_QUEJAS -> flujoVerQuejas(gerente);
+                case OPCION_GESTIONAR_QUEJA -> flujoGestionarQueja(gerente, sc);
+                case OPCION_SALIR -> {
+                }
+                default -> System.out.println("  ⚠ Opción no válida.");
             }
         } while (opcion != OPCION_SALIR);
     }

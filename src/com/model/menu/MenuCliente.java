@@ -28,13 +28,14 @@ public class MenuCliente {
             opcion = leerOpcion(sc, OPCION_SALIR);
 
             switch (opcion) {
-                case OPCION_CONSULTAR_CATALOGO: cliente.consultarCatalogo(catalogo);            break;
-                case OPCION_SOLICITAR_ENVIO:    cliente.solicitarEnvioCatalogo();               break;
-                case OPCION_INGRESAR_ORDEN:     flujoIngresarOrden(cliente, catalogo, ordenService, sc); break;
-                case OPCION_CANCELAR_ORDEN:     flujoGestionarCancelacion(cliente, ordenService, sc); break;
-                case OPCION_PRESENTAR_QUEJA:    flujoPresentarQueja(cliente, gerente, sc);      break;
-                case OPCION_SALIR:              break;
-                default:                        System.out.println("  ⚠ Opción no válida.");
+                case OPCION_CONSULTAR_CATALOGO -> cliente.consultarCatalogo(catalogo);
+                case OPCION_SOLICITAR_ENVIO -> cliente.solicitarEnvioCatalogo();
+                case OPCION_INGRESAR_ORDEN -> flujoIngresarOrden(cliente, catalogo, ordenService, sc);
+                case OPCION_CANCELAR_ORDEN -> flujoGestionarCancelacion(cliente, ordenService, sc);
+                case OPCION_PRESENTAR_QUEJA -> flujoPresentarQueja(cliente, gerente, sc);
+                case OPCION_SALIR -> {
+                }
+                default -> System.out.println("  ⚠ Opción no válida.");
             }
         } while (opcion != OPCION_SALIR);
     }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GerenteDeRelaciones extends Usuario {
-    private List<Queja> quejasRecibidas;
+    private final List<Queja> quejasRecibidas;
 
     public GerenteDeRelaciones(String nombre, String correo) {
         super(nombre, correo, "Gerente");

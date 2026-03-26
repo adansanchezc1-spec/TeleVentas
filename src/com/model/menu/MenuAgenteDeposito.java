@@ -25,12 +25,13 @@ public class MenuAgenteDeposito {
             opcion = leerOpcion(sc, OPCION_SALIR);
 
             switch (opcion) {
-                case OPCION_VER_ORDENES:        flujoVerOrdenes(agente, todasLasOrdenes);                       break;
-                case OPCION_ARMAR_DESPACHAR:    flujoArmarDespachar(agente, todasLasOrdenes, empresas, sc);     break;
-                case OPCION_ACTUALIZAR_STOCK:   flujoActualizarStock(agente, catalogo, sc);                     break;
-                case OPCION_ASIGNAR_TRANSPORTE: flujoAsignarTransporte(agente, todasLasOrdenes, empresas, sc);  break;
-                case OPCION_SALIR:              break;
-                default:                        System.out.println("  ⚠ Opción no válida.");
+                case OPCION_VER_ORDENES -> flujoVerOrdenes(agente, todasLasOrdenes);
+                case OPCION_ARMAR_DESPACHAR -> flujoArmarDespachar(agente, todasLasOrdenes, empresas, sc);
+                case OPCION_ACTUALIZAR_STOCK -> flujoActualizarStock(agente, catalogo, sc);
+                case OPCION_ASIGNAR_TRANSPORTE -> flujoAsignarTransporte(agente, todasLasOrdenes, empresas, sc);
+                case OPCION_SALIR -> {
+                }
+                default -> System.out.println("  ⚠ Opción no válida.");
             }
         } while (opcion != OPCION_SALIR);
     }
