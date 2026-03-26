@@ -1,9 +1,5 @@
 package com.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 import com.model.menu.MenuAgenteDeposito;
 import com.model.menu.MenuCliente;
 import com.model.menu.MenuGerenteRelaciones;
@@ -19,6 +15,9 @@ import com.model.model.TransporteRapido;
 import com.model.model.Usuario;
 import com.model.service.CatalogoService;
 import com.model.service.OrdenService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class App {
 
@@ -97,7 +96,7 @@ public class App {
                     (GerenteDeRelaciones) usuario,
                     sc);
         } else {
-            System.out.println("  ⚠ Rol no reconocido. Contacta al administrador.");
+            System.out.println("   Rol no reconocido. Contacta al administrador.");
         }
     }
    
