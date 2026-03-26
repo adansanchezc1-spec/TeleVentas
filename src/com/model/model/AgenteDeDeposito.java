@@ -23,13 +23,16 @@ public class AgenteDeDeposito extends Usuario {
     }
 
     /**
-     * Imprime la lista de empaque de todos los productos de la orden.
+     * Imprime la lista de empaque de todos los productos de la orden y actualiza el stock.
      */
     public void armarPedido(OrdenDeCompra orden) {
         System.out.println("  ┌── Lista de empaque — Orden #" + orden.getId() + " ──");
         List<Producto> productos = orden.getListaProductos();
         for (int i = 0; i < productos.size(); i++) {
-            System.out.printf("  │  %d. %s%n", i + 1, productos.get(i));
+            Producto p = productos.get(i);
+            System.out.printf("  │  %d. %s%n", i + 1, p);
+            p.reducirStock(1);
+            System.out.printf("  │     [Stock] Reducido en 1. Restante: %d%n", p.getStock());
         }
         System.out.println("  └── Pedido armado y listo para despacho. ──");
     }

@@ -50,15 +50,24 @@ public class App {
         // ── 6. Repositorio global de órdenes ─────────────────
         OrdenService ordenService = new OrdenService();
 
-        // ── 7. Inicio de sesión ───────────────────────────────
-        Usuario usuario = MenuPrincipal.iniciarSesion(sc);
+    // ── 7. Inicio de sesión ───────────────────────────────
+        boolean continuar = true;
+        while (continuar) {
+            Usuario usuario = MenuPrincipal.iniciarSesion(sc);
 
-        System.out.println("\n  Bienvenido/a, " + usuario.getNombre()
-                + " [" + usuario.getRol() + "]");
+            System.out.println("\n  Bienvenido/a, " + usuario.getNombre()
+                    + " [" + usuario.getRol() + "]");
 
-        // ── 8. Redirigir al menú según el rol ─────────────────
-        despacharMenuPorRol(usuario, catalogo, gerente,
-                ordenService, empresas, sc);
+            // ── 8. Redirigir al menú según el rol ─────────────────
+            despacharMenuPorRol(usuario, catalogo, gerente,
+                    ordenService, empresas, sc);
+
+            System.out.print("\n¿Desea iniciar sesión como otro usuario? (s/n): ");
+            String resp = sc.nextLine().trim().toLowerCase();
+            if (!"s".equals(resp)) {
+                continuar = false;
+            }
+        }
 
         // ── 9. Cierre de sesión ───────────────────────────────
         System.out.println("\n  Sesión cerrada. ¡Hasta pronto!");

@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class MenuGerenteRelaciones {
 
     private static final int OPCION_VER_QUEJAS      = 1;
-    private static final int OPCION_GESTIONAR_QUEJA = 2;
+    private static final int OPCION_RESPONDER_QUEJA = 2;
     private static final int OPCION_SALIR           = 3;
 
     public static void mostrar(GerenteDeRelaciones gerente, Scanner sc) {
@@ -23,7 +23,7 @@ public class MenuGerenteRelaciones {
 
             switch (opcion) {
                 case OPCION_VER_QUEJAS -> flujoVerQuejas(gerente);
-                case OPCION_GESTIONAR_QUEJA -> flujoGestionarQueja(gerente, sc);
+                case OPCION_RESPONDER_QUEJA -> flujoResponderQueja(gerente, sc);
                 case OPCION_SALIR -> {
                 }
                 default -> System.out.println("  ⚠ Opción no válida.");
@@ -44,22 +44,25 @@ public class MenuGerenteRelaciones {
             Queja q = quejas.get(i);
             System.out.printf("  [%d] Título     : %s%n", i + 1, q.getTitulo());
             System.out.printf("       Descripción: %s%n", q.getDescripcion());
+            if (q.getRespuesta() != null) {
+                System.out.printf("       Respuesta  : %s%n", q.getRespuesta());
+            }
             System.out.println("       ─────────────────────────────────");
         }
     }
 
-    // ── Flujo: gestionar (atender) una queja ─────────────────
+    // ── Flujo: responder una queja ────────────────────────
 
-    private static void flujoGestionarQueja(GerenteDeRelaciones gerente, Scanner sc) {
+    private static void flujoResponderQueja(GerenteDeRelaciones gerente, Scanner sc) {
         List<Queja> quejas = gerente.getQuejasRecibidas();
         if (quejas.isEmpty()) {
-            System.out.println("  No hay quejas pendientes para gestionar.");
+            System.out.println("  No hay quejas pendientes para responder.");
             return;
         }
 
         flujoVerQuejas(gerente);
 
-        System.out.print("  Número de queja a atender: ");
+        System.out.print("  Número de queja a responder: ");
         int indice = leerIndice(sc, quejas.size());
         if (indice < 0) {
             System.out.println("  ⚠ Selección inválida.");
@@ -67,8 +70,10 @@ public class MenuGerenteRelaciones {
         }
 
         Queja queja = quejas.get(indice);
-        gerente.gestionarQueja(queja);
-        System.out.printf("  ✔ Queja '%s' marcada como atendida.%n", queja.getTitulo());
+        System.out.print("  Ingresa la respuesta: ");
+        String respuesta = sc.nextLine().trim();
+        gerente.responderQueja(queja, respuesta);
+        System.out.printf("  ✔ Queja '%s' respondida.%n", queja.getTitulo());
     }
 
     // ── Helpers de UI ────────────────────────────────────────
@@ -78,7 +83,7 @@ public class MenuGerenteRelaciones {
         System.out.println("  ║  MENÚ GERENTE DE RELACIONES — " + nombre);
         System.out.println("  ╠════════════════════════════════════════╣");
         System.out.println("  ║  1. Ver quejas recibidas               ║");
-        System.out.println("  ║  2. Gestionar (atender) una queja      ║");
+        System.out.println("  ║  2. Responder una queja                ║");
         System.out.println("  ║  3. Salir                              ║");
         System.out.println("  ╚════════════════════════════════════════╝");
     }

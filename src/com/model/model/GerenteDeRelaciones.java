@@ -19,15 +19,11 @@ public class GerenteDeRelaciones extends Usuario {
     }
 
     /**
-     * Atiende y elimina una queja de la lista.
+     * Responde a una queja y la marca como atendida (la mantiene en la lista).
      */
-    public void gestionarQueja(Queja queja) {
-        boolean eliminada = quejasRecibidas.remove(queja);
-        if (eliminada) {
-            System.out.println("  [Gerente] Queja atendida: '" + queja.getTitulo() + "'");
-        } else {
-            System.out.println("  [Gerente] La queja no se encontró en la lista.");
-        }
+    public void responderQueja(Queja queja, String respuesta) {
+        queja.setRespuesta(respuesta);
+        System.out.println("  [Gerente] Queja respondida: '" + queja.getTitulo() + "'");
     }
 
     /**
