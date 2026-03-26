@@ -182,3 +182,4 @@ Punto de entrada del sistema.
 - Stock se actualiza automáticamente al armar pedidos.
 - Quejas se envían inmediatamente al gerente global.
 - Órdenes pasan por estados: nocomprado -> comprado -> armado (implícito) -> encamino.
+Gracias por interesarte en este proyecto, si quieres apoyar el repositorio dale estrellita :P
