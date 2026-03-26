@@ -2,16 +2,11 @@ package com.model.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GerenteDeRelaciones {
-  private List<Queja> quejasRecibidas;
-  private String nombre;
-  private String correo;
-  private String rol;
+public class GerenteDeRelaciones extends Usuario {
+    private List<Queja> quejasRecibidas;
 
     public GerenteDeRelaciones(String nombre, String correo) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.rol = "Gerente";
+        super(nombre, correo, "Gerente");
         this.quejasRecibidas = new ArrayList<>();
     }
 

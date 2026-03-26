@@ -1,11 +1,8 @@
 package com.model.menu;
 import com.model.model.AgenteDeDeposito;
 import com.model.model.Cliente; 
-import com.model.model.EmpresaTransporte;
 import com.model.model.GerenteDeRelaciones;
 import com.model.model.Usuario;
-import com.model.service.OrdenService;
-import java.util.List;
 import java.util.Scanner;
 
 public class MenuPrincipal {
@@ -74,10 +71,16 @@ public class MenuPrincipal {
 
     private static Usuario crearUsuario(int opcion, String nombre, String correo) {
         switch (opcion) {
-            case ROL_CLIENTE:  return new Cliente(nombre, correo);
-            case ROL_AGENTE:   return new AgenteDeDeposito(nombre, correo);
-            case ROL_GERENTE:  return new GerenteDeRelaciones(nombre, correo);
-            default:           throw new IllegalArgumentException("Rol no reconocido: " + opcion);
+            case ROL_CLIENTE -> {
+                return new Cliente(nombre, correo);
+            }
+            case ROL_AGENTE -> {
+                return new AgenteDeDeposito(nombre, correo);
+            }
+            case ROL_GERENTE -> {
+                return new GerenteDeRelaciones(nombre, correo);
+            }
+            default -> throw new IllegalArgumentException("Rol no reconocido: " + opcion);
         }
     }
 }
