@@ -17,17 +17,27 @@ public class MenuPrincipal {
 
     /**
      * Solicita nombre, correo y rol. Retorna el objeto Usuario correspondiente.
+     * Para el rol de Gerente de Relaciones, verifica las credenciales específicas.
      */
     public static Usuario iniciarSesion(Scanner sc) {
         System.out.println("\n  ╔══════════════════════════════════╗");
         System.out.println("  ║     BIENVENIDO A TELEVENTAS      ║");
         System.out.println("  ╚══════════════════════════════════╝");
 
-        String nombre = leerNombreNoVacio(sc);
-        String correo = leerCorreo(sc);
-        int    opcion = leerOpcionRol(sc);
+        while (true) {
+            String nombre = leerNombreNoVacio(sc);
+            String correo = leerCorreo(sc);
+            int opcion = leerOpcionRol(sc);
 
-        return crearUsuario(opcion, nombre, correo);
+            if (opcion == ROL_GERENTE) {
+                if (!"Carlos Mendoza".equals(nombre) || !"gerente@televentas.com".equals(correo)) {
+                    System.out.println("  ⚠ Credenciales inválidas para Gerente de Relaciones. Intenta de nuevo.");
+                    continue;
+                }
+            }
+
+            return crearUsuario(opcion, nombre, correo);
+        }
     }
 
     // ── Helpers privados ─────────────────────────────────────

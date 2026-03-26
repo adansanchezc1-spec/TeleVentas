@@ -1,7 +1,6 @@
 package com.model.menu;
 import com.model.model.GerenteDeRelaciones;
 import com.model.model.Queja;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,7 +25,7 @@ public class MenuGerenteRelaciones {
                 case OPCION_RESPONDER_QUEJA -> flujoResponderQueja(gerente, sc);
                 case OPCION_SALIR -> {
                 }
-                default -> System.out.println("  ⚠ Opción no válida.");
+                default -> System.out.println("  Opción no válida.");
             }
         } while (opcion != OPCION_SALIR);
     }
