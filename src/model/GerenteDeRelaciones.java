@@ -4,9 +4,14 @@ import java.util.List;
 
 public class GerenteDeRelaciones {
   private List<Queja> quejasRecibidas;
+  private String nombre;
+  private String correo;
+  private String rol;
 
     public GerenteDeRelaciones(String nombre, String correo) {
-        super(nombre, correo, "Gerente");
+        this.nombre = nombre;
+        this.correo = correo;
+        this.rol = "Gerente";
         this.quejasRecibidas = new ArrayList<>();
     }
 
