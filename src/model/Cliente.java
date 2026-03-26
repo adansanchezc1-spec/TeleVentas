@@ -1,7 +1,7 @@
 // ══════════════════════════════════════
 //  — televentas/model/Cliente.java
 // ══════════════════════════════════════
-package com.model;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
